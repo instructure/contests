@@ -1,0 +1,33 @@
+Cade is out with some friends and sees a particularly exciting claw-style game.
+The game consists of a number of stuffed chickens and goats laid out in a grid
+where Cade has the opportunity to control a hovering claw to try and grab one of
+the stuffed farm animals.
+
+A friend bets Cade that he can't get both a chicken and a goat in the same
+attempt. Cade accepts the challenge, but needs your help. Cade needs to know
+which chicken and goat pair is the closest together to best improve his chances.
+
+You will receive C, C >= 1, the number of chickens, and G, G >= 1, the number of
+goats, on the first line. You will then receive C lines consisting of a chicken
+ID followed by integral X and Y coordinates, and then you will receive G lines
+consisting of a goat ID followed by integral X and Y coordinates. Goat IDs and
+chicken IDs will not overlap and will be globally unique.
+
+Your output will be one line consisting of a chicken ID followed by a goat ID
+that constitutes the closest pair of stuffed farm animals for Cade to try and
+grab.
+
+Example:
+
+STDIN:
+
+2 3
+1 0 0
+2 -1 3
+3 2 2
+4 2 -4
+5 -3 -1
+
+STDOUT:
+
+1 3

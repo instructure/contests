@@ -1,0 +1,22 @@
+Please see roads.txt for the problem description.
+
+On this problem, we totally screwed up two test cases. During the competition,
+stdout2.txt said 62 (not the correct 16), and stdout4.txt said 81 (not 78).
+
+Luckily, no one actually passed the other 4 test cases before the online round
+was over. There have been a few people working on it since the competition
+ended (sorry to waste your time guys), but for this repo, we fixed them.
+
+At the time of the competition, our solution was simply a breadth-first-search
+across the entire graph, and, yeah, it was flawed for some of our own test
+cases.
+
+The solution provided now was thought of by one of our engineers later, and is
+to consider a pair (city_id, remaining_wallet) as a node in a graph, and to run
+Dijkstra's algorithm.
+
+For example, say you're at city A and your wallet has 5 bitcoins. There's a road
+from city A to city B that is length 4 and costs 2 bitcoins. This is represented
+in the graph as a node (A, 5) connected to a node (B, 3) with edge distance 4.
+We threw out nodes in the graph where your wallet ran out of money (i.e., the
+second element in our node tuples was always non-negative).

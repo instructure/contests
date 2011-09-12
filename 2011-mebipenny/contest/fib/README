@@ -1,0 +1,14 @@
+Please see fib.txt for the problem description.
+
+The main issue with this problem that tripped people up is related to unique
+Fibonacci numbers. The problem asks how many unique Fibonacci numbers are there
+between A and B inclusive?
+
+So the most instructive test case is when A = 0 and B = 2. The first few
+Fibonacci numbers are 0, 1, 1, 2, 3, 5, ..., but there are only 3 unique
+Fibonacci numbers between 0 and 2 inclusive, 0, 1, and 2. Are you counting 1
+twice?
+
+It goes without saying that you can't solve this problem very efficiently if
+you use the recursive definition of Fibonacci numbers without any kind of
+dynamic programming or memoization.

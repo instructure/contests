@@ -1,0 +1,31 @@
+Please see hexcode.txt for the problem description.
+
+This problem is surprising in a few ways. People either were getting wrong
+answers or were hitting the time limit or both.
+
+On wrong answers:
+
+ The problem is asking how many unique messages can generate the provided
+encoding. Many people overcounted, or counted invalid encodings. For instance,
+what maps to the string '01'? Nothing. '01' is an invalid encoding. You have to
+be sure that you are only considering character encodings that are valid.
+
+On time limits:
+
+ A naive approach to this problem admits a recusive, exponential solution, as
+each time you process a string section that has multiple possible decodings, you
+try both routes independently. However, there is significant overlap in the
+subsequent state space. In fact, this problem can be solved in O(n) time.
+
+The key observation to an O(n) solution is that when you are processing a
+character, you are either in the middle of processing a double-character
+encoding, or you're not. If you keep track of two accumulators for both cases,
+you can actually get away with a single run through the input.
+
+Aside: One of our engineers found a rather interesting alternate solution to
+this problem. He noticed that if you go through the input and split the string
+at points where there is no ambiguity, and then keep track of all the
+corresponding ambiguous substrings, you can do the following trick: for each
+ambiguous string X, calculate Fibonacci(len(X)+1). Then multiply all of your
+calculated Fibonacci numbers together. This arrives at the same solution as the
+double-accumulator solution.

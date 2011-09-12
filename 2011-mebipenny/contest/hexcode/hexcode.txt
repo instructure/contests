@@ -1,0 +1,58 @@
+Benji and Heidi work at George Films. The founder of George Films, Lucas George,
+has recently started making questionable editorial decisions regarding
+rereleases of his work, and Benji and Heidi want to discuss it privately.
+
+Heidi tells Benji to send him coded messages using a hexadecimal encoding. Heidi
+assumes Benji will use the standard ASCII encoding for the alphabet, but Benji
+opts to use the following mapping instead.
+
+a = 1       h = 8       o = F       v = 16
+b = 2       i = 9       p = 10      w = 17
+c = 3       j = A       q = 11      x = 18
+d = 4       k = B       r = 12      y = 19
+e = 5       l = C       s = 13      z = 1A
+f = 6       m = D       t = 14
+g = 7       n = E       u = 15
+
+Benji's test message is "hanshotfirst," which he encodes as "81E138F1469121314."
+Heidi meets with him later to discuss the problem she sees.
+
+"Benji," Heidi says, "letters before 'p' all use a single digit in your scheme,
+but letters 'p' and up use two digits. It's ambiguous. I could decode your
+message as 'hanachotfiract,' or as 'hanshoadfirsad,' or even as
+'hanachoadfiabacad,' for example."
+
+Benji replies, "no no, it's fine," sort of waving his hands above his head.
+"It's ambiguous, but that's what makes it a better code. Those other decodings
+of my message don't make sense. You should be able to just pick the decoding
+that actually makes sense and isn't crazy. This is more secretive and harder to
+crack."
+
+Heidi isn't convinced. "I bet if you gave me a string of any paragraph-sized
+length, there would be too many decodings to make sorting through which ones
+make sense intractable."
+
+Who's right? Given a string of characters [0-9A-F], how many possible messages
+could have generated the string given Benji's encoding? Your job is to write
+a program that answers this question.
+
+Your input will be an arbitrary number of strings, one per line. Each line will
+be a valid encryption (so, no line will start with a "0", for example). The
+input will end when you receive the string "0". For each string prior to "0"
+that you receive, you should output the number of possible decodings that string
+has, one per line.
+
+Example:
+
+STDIN:
+
+85CCF
+11211
+191191012F7121DD9E7
+0
+
+STDOUT:
+
+1
+6
+24

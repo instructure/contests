@@ -1,0 +1,5 @@
+Please see spelunking.txt for a problem description.
+
+The key observation to this problem is that you are setting up a flow diagram
+and are calculating the max flow. This problem is almost a direct implementation
+of something like Ford-Fulkerson or Edmonds-Karp.

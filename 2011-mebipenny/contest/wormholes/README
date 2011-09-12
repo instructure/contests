@@ -1,0 +1,11 @@
+Please see wormhole.txt for the problem description.
+
+The Bellman-Ford algorithm, given a graph, will compute single-source shortest
+paths in a graph such as the one given to you in the problem description.
+Notably, Bellman-Ford works on graphs with negative edge weights, presuming
+there are no negative cycles. When Bellman-Ford detects a negative cycle, it
+simply bails and cannot proceed.
+
+Useful, no? All you have to do is implement Bellman-Ford, feed it the graph
+given in the test case, and if Bellman-Ford bails due to a negative cycle, then
+you found an arbitrary-length time-portal to the past.

@@ -1,0 +1,45 @@
+Suppose there are U universes.
+
+Suppose each universe is filled with N galaxies, where N varies from universe to
+universe, and connecting the galaxies are M wormholes, where M varies from
+universe to universe. Wormholes are unidirectional and always connect two
+different galaxies in the same universe.
+
+Suppose further that traveling through a wormhole is instantaneous and travel
+through a galaxy is negligible. Additionally, wormholes each have a specific
+time differential associated, such that when you enter some wormholes, you exit
+some amount of years in the future, but through others, you exit some amount of
+years in the past.
+
+Lastly, suppose that you can reach, from a starting galaxy, through some series
+of wormhole jumps, every other galaxy in that universe, though it's not
+necessarily the case that you can get back.
+
+Given a universe description, is it possible to go an arbitrary amount of time
+back into the past?
+
+You will be given U universe descriptions. Each universe description consists
+of one line containing N and M for that universe. Then M lines will follow,
+each of the format A B T, where A is the source galaxy, B is the target galaxy,
+and T is the time differential in years (positive means into the future,
+negative means into the past). You can assume the starting galaxy is labeled
+galaxy 1.
+
+For each universe, you will need to output "Y" or "N".
+
+Example:
+
+STDIN:
+
+1
+5 6
+1 2 15
+2 5 12
+3 2 20
+5 3 -40
+3 4 40
+4 5 10
+
+STDOUT:
+
+Y

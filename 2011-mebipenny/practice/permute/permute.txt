@@ -1,0 +1,30 @@
+My friend Mike just sent me a text message, asking if I can think of a way to
+make the numbers 10, 10, 9, 9, and 1 equal 8. He says I am only allowed to use
+addition, subtraction, and/or multiplication (+, -, *), and numbers must be used
+the number of times they are listed (i.e., I should use 1 once, but I should use
+10 and 9 both twice).
+
+I solved this problem myself, and I kind of lucked out, because there was a
+solution. It turns out that (((10 - 10) * 9) + (9 - 1)) = 8, but I'd like to be
+able to know in the future whether or not a solution even exists first, for if
+Mike texts me again. Can you help?
+
+You need to write a program that takes a list of numbers and a target result
+and outputs whether or not it's possible to combine those numbers using only
+addition, subtraction, and/or multiplication to get the target result.
+
+You will first receive a line that says how many problems your program can
+expect, N, followed by N lines of an arbitrary amount of integers. The last
+integer on each line is the target. If a combination can be made, output "Y",
+otherwise output "N".
+
+Example:
+
+STDIN:
+
+1
+10 10 9 9 1 8
+
+STDOUT:
+
+Y

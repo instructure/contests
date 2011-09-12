@@ -1,0 +1,46 @@
+A team of spelunkers is spelunking through a series of caves. The caves they
+spelunk in are organized in the following way:
+
+Each cave is connected to other caves through at least partially vertical
+corridors. Caves can hold all of the available spelunkers, whereas corridors
+each have their own limit of the maximum number of spelunkers that can travel
+through them at a time. Since the corridors are in some places vertical, the
+spelunkers can only travel down. The caves are arranged on a series of levels,
+such that every corridor connects a cave from one level to a cave on the very
+next level below it. The topmost level has exactly one cave, as does the
+bottommost level.
+
+The spelunkers play a simultaneous spelunking game with these caves. All of the
+spelunkers start in the topmost cave and all travel to the bottommost cave. The
+spelunkers time their descents through the corridors such that every spelunker
+moves down exactly one level at the same time.
+
+Since the corridors have a maximum capicity of simultaneous spelunkers, given
+a cave description, what is the maximum number of spelunkers the cave system can
+support?
+
+The caves are numbered 1..N, where 1 is the topmost cave, and N is the
+bottommost cave. There are M corridors.
+
+The first line of STDIN given to you is N. The second line is M.
+
+The next M lines are formatted as A B C, where A is the source cave, B is
+the destination cave, and C is the corridor capacity.
+
+Your output should be the maximum number of spelunkers that can participate in
+the game of simultaneous spelunking at the same time.
+
+Example:
+
+STDIN:
+
+4
+4
+1 2 1
+1 3 2
+2 4 1
+3 4 3
+
+STDOUT:
+
+3

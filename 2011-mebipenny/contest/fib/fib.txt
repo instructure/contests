@@ -1,0 +1,32 @@
+Recall that the Fibonacci numbers are defined as follows:
+
+F(0) = 0
+F(1) = 1
+F(n) = F(n-1) + F(n-2) for n > 1
+
+The first eleven Fibonacci numbers are written out on the second line:
+
+n     0  1  2  3  4  5  6  7  8  9 10 ...
+F(n)  0  1  1  2  3  5  8 13 21 34 55 ...
+
+Given two endpoints A and B, how many unique Fibonacci numbers are there, such
+that for a given Fibonnaci number F(n), A <= F(n) <= B?
+
+You will first be given the number of problems to solve, N, and then you will be
+given N rows, each consisting of two endpoints A and B. For each row, you must
+output the number of unique Fibonacci numbers in that range, inclusive.
+
+Example:
+
+STDIN:
+
+3
+2 21
+2 4
+4 10
+
+STDOUT:
+
+6
+2
+2

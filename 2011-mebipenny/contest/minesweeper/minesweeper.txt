@@ -1,0 +1,40 @@
+You may remember the classic Windows game of Minesweeper. In this game, an N by
+M grid of cells was covered by opaque buttons, and K mines were hidden under
+the buttons.
+
+During the initial setup for the game, the Minesweeper program would randomly
+place all K mines on the grid and then number the remaining grid cells with how
+many adjacent mines each cell had, leaving 0-cells blank. In this way, every
+cell is in one of three states:
+
+ 1) It has a mine.
+ 2) It is adjacent, either horizontally, vertically, or diagonally, to a cell
+    with a mine, and keeps count of how many mines it is adjacent to.
+ 3) It is not adjacent to any mines.
+
+Your job will be to calculate the counts that cells in state (2) have.
+
+You will first be given a line that contains N, M, and K. You will then receive
+K additional lines describing where the mines are. Each mine description line
+will consist of X and Y, where 0 <= X < N, and 0 <= Y < M.
+
+Your job is to write out all of the counts for cells in state (2) in sorted
+order. Your output will be a row for each cell consisting of X, Y, and the
+adjacent mine count. You should skip cells in state (3) completely (i.e., cells
+with a 0 adjacent mine count). The sort order for your output should be ordered
+by X primarily, lowest to highest, with Y lowest to highest breaking ties on X.
+
+Example:
+
+STDIN:
+
+3 3 2
+0 0
+0 1
+
+STDOUT:
+
+0 2 1
+1 0 2
+1 1 2
+1 2 1

@@ -1,0 +1,17 @@
+Please see permute.txt for the problem description.
+
+This problem was not the best stated of our problem set this year. Luckily it
+was only a practice problem.
+
+The general problem, restated, is, given a set of numbers in any order, a set of
+binary operations in any order (which are not necessarily commutative), and a
+target result, can you use those numbers and binary operations in some arbitrary
+ordering to generate the target result?
+
+A straightforward solution is to simply generate all the postfix-notation
+variations of combinations of permutations of the given numbers, evaluate them,
+and stop if you find one that generates the target result.
+
+Common problems with provided solutions often centered around not actually
+considering all orderings of the provided numbers, in addition to all the
+possible orderings (and commutativity) of the operators.

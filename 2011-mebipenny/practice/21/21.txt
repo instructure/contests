@@ -1,0 +1,32 @@
+Given a variable number of playing cards, form the best hand that does not
+exceed 21. The cards are in the set [23456789JQKA], where 2-9 are worth their
+face value, J Q and K are worth 10, and A can be selected to be worth either 1
+and 11. In this scenario, you are only playing with one suit, so there is never
+more than one of each card.
+
+Input:
+
+The first line is a single number, which is the number of lines to follow. Each
+line after that is a sequence of characters in the above set.
+
+Output:
+
+For each input line of cards, output the highest possible score that does not
+exceed 21.
+
+Example:
+
+STDIN:
+
+4
+296J
+85
+A37
+475A
+
+STDOUT:
+
+21
+13
+21
+20

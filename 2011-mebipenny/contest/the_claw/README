@@ -1,0 +1,14 @@
+See the_claw.txt for a problem description.
+
+This problem is one in which many people think they intuitively grasp the best
+approach where there is a subtle but better algorithm. All but one of the
+solutions I saw implemented an O(n^2) algorithm, one guy even reimplementing his
+interpreted language solution in C++ to try and gain speed.
+
+However, you can do better. This problem can be solved in O(n log n).
+See http://en.wikipedia.org/wiki/Closest_pair_of_points_problem
+
+The only modification to the standard algorithm presented above is that you
+simply don't consider point pairs that you are uninterested in, such as a pair
+of goats or a pair of chickens. 4 of the 7 points for this problem were easily
+gained if you implemented this faster algorithm.

@@ -11,12 +11,8 @@ time differential associated, such that when you enter some wormholes, you exit
 some amount of years in the future, but through others, you exit some amount of
 years in the past.
 
-Lastly, suppose that you can reach, from a starting galaxy, through some series
-of wormhole jumps, every other galaxy in that universe, though it's not
-necessarily the case that you can get back.
-
 Given a universe description, is it possible to go an arbitrary amount of time
-back into the past?
+back into the past from some starting universe?
 
 You will be given U universe descriptions. Each universe description consists
 of one line containing N and M for that universe. Then M lines will follow,

@@ -9,3 +9,16 @@ simply bails and cannot proceed.
 Useful, no? All you have to do is implement Bellman-Ford, feed it the graph
 given in the test case, and if Bellman-Ford bails due to a negative cycle, then
 you found an arbitrary-length time-portal to the past.
+
+
+UPDATE, 9/15: So, I've had a few reports of issues with this problem. Looks like
+  slightly modifying and updating test problems the night before at 4 in the
+  morning is a bad idea.
+
+  Two issues with this problem:
+
+  1) The paragraph about being able to reach every other galaxy from your
+     starting was most definitely wrong, and many of the test cases explicitly
+     checked to make sure you weren't assuming that. Whoops.
+  2) I accidentally deleted a newline in one of the inputs. It's not exactly
+     clear to me how my test program worked anyway. Still investigating.

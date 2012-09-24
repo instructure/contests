@@ -1,0 +1,61 @@
+<p>Like many math-wielding civilizations, the ancient Egyptians had a need to
+represent fractional values. Their representation of fractions was similar to
+our current system, with one limitation: the numerator (top part) of the
+fraction is always 1. That is, they could only write fractions like these:</p>
+
+<pre>
+1/2, 1/3, 1/4, 1/5, 1/6, ...
+</pre>
+
+<p>Any other fractional amount was represented as the sum of these simple
+fractions. Note that in the Egyptian fraction system, each denominator can only
+be used once.</p>
+
+<pre>
+3/5 = 1/2 + 1/10  (NOT 1/5 + 1/5 + 1/5)
+</pre>
+
+<p>Any modern fraction with a positive integral numerator and denominator can
+be represented in the Egyptian style. Your task is to write a program that
+accepts a "modern" fraction and outputs the Egyptian representation. Note that
+there may be mulitple valid representations. (Example: 1/2 could be written
+"1/3 + 1/6"). Your program should always use the largest unit possible, and
+display the components in descending order. Example:</p>
+
+<pre>
+4/7 = 1/2 + 1/14              (CORRECT)
+4/7 = 1/3 + 1/6 + 1/14        (INCORRECT)
+
+3/4 = 1/2 + 1/4               (CORRECT)
+3/4 = 1/4 + 1/2               (INCORRECT)
+3/4 = 1/2 + 1/5 + 1/20        (INCORRECT)
+3/4 = 1/3 + 1/5 + 1/6 + 1/20  (INCORRECT)
+</pre>
+
+<h3>Input</h3>
+
+<p>Each line of input will be two positive non-zero integers, the first less
+than or equal to the second, representing a fraction in (0, 1].</p>
+
+<h3>Output</h3>
+
+<p>For each input, print a line with the Egyptian denominators in ascending
+order.</p>
+
+<h3>Example</h3>
+
+<p>STDIN:</p>
+
+<pre>
+3 5
+5 7
+5 13
+</pre>
+
+<p>STDOUT:</p>
+
+<pre>
+2 10
+2 5 70
+3 20 780
+</pre>

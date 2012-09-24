@@ -1,0 +1,57 @@
+<p>Your former co-worker has left your company to work at a distributed storage
+startup. He has decided to serialize all messages between systems using an
+implementation of morse code as follows:</p>
+
+<pre>
+A ._            N _.
+B _...          O ___
+C _._.          P .__.
+D _..           Q __._
+E .             R ._.
+F .._.          S ...
+G __.           T _
+H ....          U .._
+I ..            V ..._
+J .___          W .__
+K _._           X _.._
+L ._..          Y _.__
+M __            Z __..
+</pre>
+
+<p>For example, ".__..__._..._" is the word "PANDA". Unfortunately, this
+sequence also spells 'ADGBT', 'PAKV', 'WUNBT', 'WUNNIT', 'WUNNU', etc., along
+with many others. To solve this problem, your friend asks you to find a
+solution while he works on developing his own programming language.</p>
+
+<h3>Input</h3>
+
+<p>The input will be a string of morse code.</p>
+
+<h3>Output</h3>
+
+<p>As output, print all of the possible translations, separated by new lines,
+in alphabetical order.</p>
+
+<h3>Example</h3>
+
+<p>STDIN:</p>
+
+<pre>
+.__..__._..._
+</pre>
+
+<p>STDOUT:</p>
+
+<pre>
+ADGBT
+ADGDA
+ADGDET
+ADGNEA
+ADGNEET
+...
+WUTLET
+WUTREA
+WUTREET
+WUTRIT
+WUTRU
+</pre>

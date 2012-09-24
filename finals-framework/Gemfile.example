@@ -1,0 +1,11 @@
+source :rubygems
+
+gem 'rack'
+gem 'eventmachine'
+gem 'json'
+gem 'thin'
+
+
+group :test do
+  gem 'rspec'
+end

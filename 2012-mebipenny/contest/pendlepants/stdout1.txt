@@ -1,0 +1,8 @@
+turqoise mesh horn-rim
+turqoise mesh waldo
+turqoise prison-stripe horn-rim
+turqoise prison-stripe waldo
+pendlepants mesh horn-rim
+pendlepants mesh waldo
+pendlepants prison-stripe horn-rim
+pendlepants prison-stripe waldo

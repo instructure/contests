@@ -1,0 +1,89 @@
+<p>A group of DNA researchers are getting together to discuss their findings,
+and each of them has several long sequences of nucleic acids that they need to
+share with the group, but the sequences are too large to allow for efficient
+transmission as ASCII. One of them suggests that since these sequences are made
+up of just 4 letters (A, G, C, and T), they only need 2 bits per nucleic acid,
+which would cut the size by three quarters. They all agree that this seems
+great, and are about to go perform this simple transformation, when the newest
+member of the group pipes up, saying they can do better.</p>
+
+<p>She goes on to suggest that if they start with the previously proposed
+coding scheme, but use 4 bits instead of 2 for each nucleic acid, that leaves
+12 extra codes that can represent longer patterns. Amidst the grumbling of
+symbol tables and pattern frequencies, she suggests the following scheme for
+picking what these extra codes represent:</p>
+
+<ul>
+  <li>Start with the obvious coding for all 1-length patterns; that is: A =&gt; 0,
+  G =&gt; 1, C =&gt; 2, T =&gt; 3</li>
+  <li>Start processing a sequence and considering each character as they
+  come.</li>
+  <li>Each time a new character, along with a running set of characters, is already
+  in your coding map, add the new character to the running set and continue
+  (i.e. keep looking for the next new pattern).</li>
+  <li>
+    Once the running set plus a new character do NOT already have a code:
+    <ul>
+      <li>if there are available codes, map the new sequence to the the next
+      available code,</li>
+      <li>output the code for the running sequence WITHOUT the new character,</li>
+      <li>and continue processing with the new character as the running sequence.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>For example, given the string 'AGAGAGAGAGAGAGAG':</p>
+
+<table>
+  <tr><td><b><span style='color:red;'>A</span>G</b>AGAGAGAGAGAGAG</td><td>encode 'A' as 0, map 'AG' to 4</td></tr>
+  <tr><td><b><span style='color:red;'>G</span>A</b>GAGAGAGAGAGAG</td><td>encode 'G' as 1, map 'GA' to 5</td></tr>
+  <tr><td><b><span style='color:red;'>AG</span>A</b>GAGAGAGAGAG</td><td>encode 'AG' as 4, map 'AGA' to 6</td></tr>
+  <tr><td><b><span style='color:red;'>AGA</span>G</b>AGAGAGAG</td><td>encode 'AGA' as 6, map 'AGAG' to 7</td></tr>
+  <tr><td><b><span style='color:red;'>GA</span>G</b>AGAGAG</td><td>encode 'GA' as 5, map 'GAG' to 8</td></tr>
+  <tr><td><b><span style='color:red;'>GAG</span>A</b>GAG</td><td>encode 'GAG' as 8, map 'GAGA' to 9</td></tr>
+  <tr><td><b><span style='color:red;'>AGAG</span></b></td><td>encode 'AGAG' as 7</td></tr>
+</table>
+
+<p>Giving a final encoding of '0146587'.</p>
+
+<p>People seem to like this idea, but a middle aged woman (known for being
+somewhat contrary), thinks that 8 bits is the right size to set, pointing out
+that that gives 252 extra codes, which will cover a lot more patterns. People
+start to clamor for 16 bits or 32 bits, and a few are still not convinced that
+any of this is an improvement over the original 2 bit solution ("32 bits for 1
+lousy nucleic acid! Bah humbug!")</p>
+
+<p>So being scientists, they propose an experiment. They decide to take a whole
+bunch of sample sequences, run them through all the proposed coding strategies,
+and see which ones come out with the shortest encoded string. Your job is to
+code up this experiment.</p>
+
+<h3>Input</h3>
+
+<p>Each line of input will contain one sequence. Sequences will only contain 4
+capital letters: A, G, C, and T, and will be at least 1 character long and no
+greater than 999,999 characters long.</p>
+
+<h3>Output</h3>
+
+<p>For each line of input, run the sequence through the encoding strategies for
+the following bit lengths: 2, 4, 8, 16, and 32, and output the bit length that
+produces the smallest encoded sequence.</p>
+
+<h3>Example</h3>
+
+<p>STDIN:</p>
+
+<pre>
+AA
+AGAGAGAGAGAGAGAGAGAG
+AAAAAAACCCCCCCGGGGGGGTTTTTTTAAAAAAACCCCCCC
+</pre>
+
+<p>STDOUT:</p>
+
+<pre>
+2
+4
+2
+</pre>

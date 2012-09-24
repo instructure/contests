@@ -1,0 +1,2 @@
+the ruby reference implementation does not solve test case 6, but the
+test case is believed correct

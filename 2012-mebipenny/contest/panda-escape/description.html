@@ -1,0 +1,70 @@
+<p>There once was a land filled with rainbows and pandas, working their bamboo
+farms and trading skittles with their unicorn neighbors. The land was ruled by
+the Panda Emperor, a kind and benevolent leader who was dearly loved.</p>
+
+<p>The Emperor fell in love and married a commoner, but his most trusted
+general &mdash; El Generalissimo &mdash; did not approve. One night he took over the
+kingdom and locked the Panda Emperor in the deepest dungeon.</p>
+
+<p>After the Emperor was captured, the Emperor's most trusted guards found the
+Empress and led her through a secret escape route into the forest. As they fled
+the traitor's troops, they reached a clearing atop a huge chasm and could go no
+further. In the clearing stood a small cottage from whose open door a man with
+a strange hat stepped into view.</p>
+
+<p>"Need to cross?" he asked.</p>
+
+<p>"Yes, sir. Please, is there anything you can do?" the Empress pled.</p>
+
+<p>The man smiled, closed his eyes, and wiggled his nose. A cloud formed at the
+edge of the chasm. The man spoke: "This cloud can carry exactly N pounds&mdash;no
+less, no more."</p>
+
+<p>"Why no less? That doesn't even make sense!" growled the Captain of the
+Guard.</p>
+
+<p>"It doesn't have to make sense, it just needs to make this problem more
+interesting," said the old man.</p>
+
+<p>There was no time to argue...</p>
+
+<p>Write a program to determine which guards should accompany the Empress.
+Solutions should maximize the number of guards accompanying her. If there are
+multiple solutions with the same number of guards, use the weight of the
+heaviest included guard as the tie breaker (or second-heaviest if the heaviest
+is tied, etc.). For example, between a solution of (150, 175, 200) and (150,
+160, 215), prefer the latter.</p>
+
+<h3>Input</h3>
+
+<p>Each line of input will consist of two or more integers. The first is the
+capacity of the cloud. The second is the weight of the Empress. The remainder
+are the weights of the guards. There may be up to 256 guards, the weights of
+the guards and Empress are each in the range [1, 255], and the max weight is at
+most 32767.</p>
+
+<h3>Output</h3>
+
+<p>For each line of input, output the optimal list of guards which will
+accompany the Empress, in order from lightest to heaviest. If there is no
+solution, output "NO SOLUTION".</p>
+
+<h3>Example</h3>
+
+<p>STDIN:</p>
+
+<pre>
+800 200 200 400 210 300 190
+300 300 100
+300 200 80 60 20 40
+200 210 80 120
+</pre>
+
+<p>STDOUT:</p>
+
+<pre>
+190 200 210
+
+20 80
+NO SOLUTION
+</pre>

@@ -1,0 +1,4 @@
+test case 5 was incorrect during the contest. the stdin had an extra
+line at the beginning stating the number of test cases in the file, and
+was not double checked against the reference implementation; the values
+in this commit are corrected.

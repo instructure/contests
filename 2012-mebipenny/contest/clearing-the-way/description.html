@@ -1,0 +1,64 @@
+<p>You may remember the classic Windows game of Minesweeper. In this
+game, an N by M grid of cells was covered by opaque buttons, and K mines
+were hidden under the buttons. After the initial setup for the game,
+every cell is in one of three states:</p>
+
+<ol>
+  <li>A cell has a mine.</li>
+  <li>It is adjacent, either horizontally, vertically, or diagonally, to
+  a cell with a mine, and keeps count of how many mines it is adjacent
+  to.</li>
+  <li>It is not adjacent to any mines.</li>
+</ol>
+
+<p>The user is then invited to click on one of the obscured cells to try
+and discover all the mines. When a user clicks a cell, the next event
+depends on the state that cell is in:</p>
+
+<ol>
+  <li>If the cell is a mine (state (1)), only the cell is shown (and
+  then the user loses).</li>
+  <li>If the cell is adjacent to a mine (state (2)), only the cell is
+  shown (the game reveals the count of adjacent mines and stops).</li>
+  <li>If the cell is not adjacent to any mines (state (3)), it shows
+  itself and then reveals all adjacent cells. If adjacent cells are also
+  in state (3), they reveal their neighbors, etc.</li>
+</ol>
+
+<p>Given a grid size, a description of mine locations, and a click
+location, you must provide all of the cell locations that are
+unobscured.</p>
+
+<h3>Input</h3>
+
+<p>The first line of input will be three integers N, M, and K. N is the
+width of the playing field and M the height; K is the number of mines.
+The next K lines will describe mine locations as X and Y coordinates.
+The final line will be the X and Y coordinates of the clicked cell.</p>
+
+<h3>Output</h3>
+
+<p>You must output the X and Y coordinates of the revealed cells, one
+line per cell. Output the lines ordered by X and then by Y.</p>
+
+<h3>Example</h3>
+
+<p>STDIN:</p>
+
+<pre>
+3 3 2
+0 0
+0 1
+2 2
+</pre>
+
+<p>STDOUT:</p>
+
+<pre>
+1 0
+1 1
+1 2
+2 0
+2 1
+2 2
+</pre>

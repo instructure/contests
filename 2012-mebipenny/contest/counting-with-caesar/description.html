@@ -1,0 +1,64 @@
+<p>Roman numerals, as used today, are based on seven symbols:</p>
+
+<pre>
+Symbol | Value
+-------+------
+I      |     1
+V      |     5
+X      |    10
+L      |    50
+C      |   100
+D      |   500
+M      | 1,000
+</pre>
+
+<p>Roman numbers are formed by combining symbols together and adding the
+values. For example, MMVI is 1000 + 1000 + 5 + 1 = 2006. Generally, symbols are
+placed in order of value, starting with the largest values. When smaller values
+precede larger values, the smaller values are subtracted from the larger
+values, and the result is added to the total. For example MCMXLIV = 1000 +
+(1000 - 100) + (50 - 10) + (5 - 1) = 1944.</p>
+
+<p>Source: <a href="http://en.wikipedia.org/wiki/Roman_numerals">http://en.wikipedia.org/wiki/Roman_numerals</a></p>
+
+<p>Write a program that converts integers into roman numerals, following the common modern conventions:</p>
+
+<ul>
+  <li>no more than one D, L, or V</li>
+  <li>no more than 3 C's, X's, or I's in succession</li>
+  <li>arbitrarily many M's</li>
+  <li>I can subtract only from V or X</li>
+  <li>X can subtract only from L or C</li>
+  <li>C can subtract only from D or M</li>
+</ul>
+
+<h3>Input</h3>
+
+<p>Each line of input will contain a single integer from 1 to 9999.</p>
+
+<h3>Output</h3>
+
+<p>For each line of input, write one line of output containing the roman
+numeral representation.</p>
+
+<h3>Example</h3>
+
+<p>STDIN:</p>
+
+<pre>
+2006
+1944
+1910
+800
+42
+</pre>
+
+<p>STDOUT:</p>
+
+<pre>
+MMVI
+MCMXLIV
+MCMX
+DCCC
+XLII
+</pre>

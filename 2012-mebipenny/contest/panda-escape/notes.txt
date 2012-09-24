@@ -1,0 +1,4 @@
+test cases 1, 3, and 4 were incorrect during the contest. the stdout was
+handcrafted and ended up backwards (values went from lowest to highest,
+rather than highest to lowest), and was not double checked against the
+reference implementation; the values in this commit are corrected.

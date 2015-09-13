@@ -1,0 +1,35 @@
+<h1>Runaway Pager</h1>
+<p>You and your friends have traveled back in time to the 1980s and the only way
+you can communicate with your friends is via two-way pager. You have a terrible
+wireless plan, and you get charged by the character, so you and your friends
+try to find an easy way to compress the messages you're sending to each other.
+Your know-it-all friend who's into these sorts of things suggests you all use a
+simplified <a href="https://en.wikipedia.org/wiki/Run-length_encoding">run-length
+encoding</a> to try to shorten the messages that get sent.</p>
+
+<p>She suggests using the following scheme:</p>
+
+<ul>
+<li>Only the letters A-Z are used. There are no spaces.</li>
+<li>If a letter appears just once, encode the letter as-is, so <code>CAT</code> becomes <code>CAT</code>.</li>
+<li>If a letter is repeated, encode the letter as the letter followed by the number<br />
+ of times it repeats, so <code>CAAAATTT</code> becomes <code>CA4T3</code>.</li>
+</ul>
+
+<p>Your program must accept lines of text and output for each the same line of text encoded according to the scheme above.</p>
+
+<h3>Example</h3>
+
+<p>STDIN:</p>
+
+<pre><code>AABZZZZQQJ
+SHAZBOT
+BQQRRRRRRZ
+BBBQTTTTTTF</code></pre>
+
+<p>STDOUT:</p>
+
+<pre><code>A2BZ4Q2J
+SHAZBOT
+BQ2R6Z
+B3QT6F</code></pre>

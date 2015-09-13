@@ -1,0 +1,151 @@
+<h1>Twisted Binaries</h1>
+<p><em>Note: This problem has been modified since it was first posted:</em></p>
+
+<ul>
+  <li>A few of the examples broke the "The edges of each input array will always be valid" constraint.
+  This didn't affect their solutions.</li>
+</ul>
+
+<p>You have some manually sorted data (all integers), and need to find the first index of a
+given integer. Some of these data sets can be fairly large, so try to stay efficient.</p>
+
+<p>The catch? Manually sorted data naturally has some errors, and you really
+want the first index of a correctly placed integer.</p>
+
+<h2 id="constraints">Constraints</h2>
+
+<ol>
+<li>Input will always be one digit per line.</li>
+<li>The first line of input is the token to find, it is not part of the array to search.</li>
+<li>The other lines of input is an array of mostly sorted integers</li>
+<li>for the slice (g,h,i,j,k) inside the array [a..z], the value at index i is valid if
+<ol>
+<li>the value at i is less than or equal to value at index j (or, if j is invalid, the value at k)</li>
+<li>AND the value at i is larger than or equal to the value at index h (or, if h is inavlid, the value at g)</li>
+  
+</ol>
+</li>
+<li>the token to find will be an integer, which may or may not be in the array.</li>
+<li>if the integer is not in the array at all, the expected return value is &quot;-1&quot;,
+followed by a second line with the index of where it <em>should</em> go if it were to be inserted.</li>
+<li>if the integer is in the array, the expected return value is the earliest index<br />
+ of the array that has that value and is valid with respect to constraint 4.</li>
+<li>Invalid values don't change the index of subsequent values, they're just discarded as candidates, so<br />
+you still want to find the index of the first valid position in the original array.</li>
+<li>The edges of each input array will always be valid (that is, you can assume that the<br />
+ first and last number in the array are valid.)</li>
+</ol>
+
+<h3 id="samples">Examples</h3>
+
+<h4 id="not-in-the-array">Not in the array:</h4>
+
+<p>Input:</p>
+<pre><code>3
+1</code></pre>
+
+<p>Output:</p>
+<pre><code>-1
+1</code></pre>
+
+<h4 id="in-the-array">In the array:</h4>
+<p>Input:</p>
+<pre><code>3
+1
+3
+5</code></pre>
+<p>Output:</p>
+<pre><code>1</code></pre>
+
+<h4 id="in-a-coincidentally-correct-array-more-than-once">In a coincidentally correct array more than once:</h4>
+<p>Input:</p>
+<pre><code>42
+1
+32
+40
+41
+42
+42
+42
+48
+48
+55
+67
+102
+102
+151</code></pre>
+<p>Output:</p>
+<pre><code>4</code></pre>
+<h4 id="in-an-invalid-spot">In an invalid spot:</h4>
+<p>Input:</p>
+<pre><code>42
+1
+42
+32
+40
+41
+48
+48
+55
+67
+102
+102
+151</code></pre>
+<p>Output:</p>
+<pre><code>-1
+5</code></pre>
+<h4 id="in-multiple-spots-only-one-is-valid">In multiple spots, only one is valid</h4>
+<p>Input:</p>
+<pre><code>999
+1
+30
+32
+999
+40
+41
+48
+48
+55
+67
+76
+84
+999
+102
+102
+151
+257
+999
+999
+1000
+1200
+1313</code></pre>
+<p>Output:</p>
+<pre><code>17</code></pre>
+<h4 id="in-multiple-spots-one-a-valid-spot-with-an-invalid-neighbor-two-in-invalid-spots">In multiple spots, one a valid spot with an invalid neighbor, two in invalid spots</h4>
+<p>Input:</p>
+<pre><code>55
+1
+30
+55
+32
+40
+41
+48
+50
+999
+55
+67
+76
+84
+99
+102
+102
+151
+257
+999
+55
+1000
+1200
+1313</code></pre>
+<p>Output:</p>
+<pre><code>9</code></pre>

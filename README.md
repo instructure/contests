@@ -1,7 +1,7 @@
 ## Layout ##
 
 Each year's problems, including the finals, are in the *-mebipenny
-folders. (2011's finals coming very soon, for real this time).
+folders.
 
 The finals-framework/ folder contains the servlet framework both year's
 finals servers built off of.

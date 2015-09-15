@@ -1,7 +1,0 @@
-#!ruby
-
-$LOAD_PATH << File.dirname(__FILE__)
-
-require 'server'
-use Rack::CommonLogger
-run Server.new

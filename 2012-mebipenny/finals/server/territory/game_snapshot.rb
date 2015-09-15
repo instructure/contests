@@ -1,8 +1,8 @@
-require 'finals-framework/game_snapshot'
+require 'gameworks'
 
 module Territory
-  class Game < FinalsFramework::Game
-    class Snapshot < FinalsFramework::Game::Snapshot
+  class Game < Gameworks::Game
+    class Snapshot < Gameworks::Game::Snapshot
       attr_reader :claims, :player_hands
 
       def initialize(game)

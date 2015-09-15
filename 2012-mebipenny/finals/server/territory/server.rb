@@ -1,8 +1,8 @@
-require 'finals-framework/server'
-require 'territory/game'
+require 'gameworks'
+require_relative 'game'
 
 module Territory
-  class Server < FinalsFramework::Server
+  class Server < Gameworks::Server
     def game_class
       Territory::Game
     end

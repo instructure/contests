@@ -1,9 +1,8 @@
 require 'net/http'
-require 'rubygems'
 require 'json'
 
 @host = "localhost"
-@port = "3456"
+@port = ENV.fetch('PORT', '9292')
 @name = "Simon #{(rand() * 1000).round}"
 @debug = true
 

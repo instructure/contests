@@ -1,8 +1,7 @@
-require 'finals-framework/player'
-require 'finals-framework/ruby-uuid/uuid'
+require 'gameworks'
 
 module Territory
-  class Player < FinalsFramework::Player
+  class Player < Gameworks::Player
     attr_reader :hand, :id
     attr_accessor :passed
 
@@ -10,7 +9,7 @@ module Territory
       super
       return if @invalid
       @hand = []
-      @id = UUID.create_random.to_s.split('-').first
+      @id = SecureRandom.uuid.to_s.split('-').first
       @passed = false
     end
 

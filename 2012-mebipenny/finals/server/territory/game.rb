@@ -1,12 +1,12 @@
-require 'finals-framework/game'
-require 'territory/tile'
-require 'territory/claim'
-require 'territory/move'
-require 'territory/player'
-require 'territory/game_snapshot'
+require 'gameworks'
+require_relative 'tile'
+require_relative 'claim'
+require_relative 'move'
+require_relative 'player'
+require_relative 'game_snapshot'
 
 module Territory
-  class Game < FinalsFramework::Game
+  class Game < Gameworks::Game
     attr_reader :rows, :cols, :claims, :draw
 
     def self.random(opts={})
@@ -82,7 +82,11 @@ module Territory
       end
     end
 
-    def build_move(payload)
+    def active_players
+      [players.reject(&:disqualified?).first]
+    end
+
+    def build_move(payload, player)
       # validate input
       return Territory::Move::PASS if payload == 'PASS'
       return false, "invalid move data" unless payload.is_a?(Hash)
@@ -96,29 +100,29 @@ module Territory
       return false, "invalid tile data" unless tile['col'].is_a?(Fixnum)
       tile = Territory::Tile.new(tile['row'], tile['col'])
 
-      favor = payload['favor'] || @current_player.id
+      favor = payload['favor'] || player.id
       favor = @players.detect{ |p| p.id == favor }
 
       Territory::Move.new(tile, favor)
     end
 
-    def move_legal?(move)
+    def move_legal?(move, player)
       return true if move == Territory::Move::PASS
       return false, "invalid tile coordinates" unless (0...rows).include?(move.tile.row) && (0...cols).include?(move.tile.col)
       return false, "tile already claimed" if @claims[move.tile.row][move.tile.col]
-      return false, "tile not in hand" unless @current_player.hand.any?{ |tile| tile == move.tile }
+      return false, "tile not in hand" unless player.hand.any?{ |tile| tile == move.tile }
       return true
     end
 
-    def process_move(move)
-      @current_player.passed = (move == Territory::Move::PASS)
+    def process_move(move, player)
+      player.passed = (move == Territory::Move::PASS)
 
-      unless @current_player.passed
-        @current_player.hand.delete(move.tile)
+      unless player.passed
+        player.hand.delete(move.tile)
 
         # add the claim to the board with its nominal owner
-        claim = generate_claim(move.tile, @current_player)
-        @current_player.score += 1
+        claim = generate_claim(move.tile, player)
+        player.score += 1
 
         # see if there's a capture
         army = army_for(claim)
@@ -149,7 +153,7 @@ module Territory
         end
 
         # draw replacement tile, if any
-        @current_player.hand << @draw.shift unless @draw.empty?
+        player.hand << @draw.shift unless @draw.empty?
       end
 
       # check for end game conditions
@@ -158,7 +162,8 @@ module Territory
       elsif @players.all?{ |p| p.hand.empty? || p.disqualified? }
         end_game
       else
-        end_turn
+        @players << @players.shift
+        signal_turns
       end
 
       return true

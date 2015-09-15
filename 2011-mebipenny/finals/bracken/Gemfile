@@ -1,0 +1,6 @@
+ gem 'json'
+ gem 'nestful'
+ 
+group :test do
+  gem 'rspec'
+end

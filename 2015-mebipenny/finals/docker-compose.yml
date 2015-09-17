@@ -1,0 +1,43 @@
+web:
+  build: ./server
+  volumes:
+    - ./server:/usr/src/app
+  links:
+    - pandapush
+  ports:
+    - "3000"
+  environment:
+    RAILS_ENV: development
+    VIRTUAL_HOST: pajitnov.docker
+    BUNDLE_PATH: /usr/src/app/.bundle/gems
+    PANDA_PUSH_APP_ID: JSnU0QYar3EqpNcXLNTE
+    PANDA_PUSH_URL: "http://pandapush:3000"
+    PANDA_PUSH_KEY: PSIDCTyQSwNgywrPEuHD
+    PANDA_PUSH_SECRET: rCAcyNN9KzSpdMLIz4MjtniLArDPnaC4s5owl4Vb
+
+client:
+  build: ./client
+  volumes:
+    - ./client:/usr/src/app
+  links:
+    - pandapush
+  ports:
+    - "2992"
+  environment:
+    PANDA_PUSH_APP_ID: JSnU0QYar3EqpNcXLNTE
+    # your web browser needs to load this URL
+    # if you are using dinghy, pandapush.docker will resolve correctly
+    # otherwise, you'll need to change it to the correct hostname/port for the pandapush container
+    PANDA_PUSH_BASE_URL: "http://pandapush.docker"
+    VIRTUAL_HOST: pajitnov-client.docker
+
+pandapush:
+  image: zwily/pandapush
+  volumes:
+    - ./dev/pandapush-data:/app/localdata
+  ports:
+    - "3000"
+  environment:
+    ADMIN_USERNAME: admin
+    ADMIN_PASSWORD: admin
+    VIRTUAL_HOST: pandapush.docker

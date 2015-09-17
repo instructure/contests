@@ -1,0 +1,18 @@
+.root {
+  background-color: $color-light;
+  color: $color-dark;
+  border-radius: 0.5em;
+  margin: 1em 0;
+  padding: 0.2em;
+  text-align: center;
+}
+
+.border {
+  border: 0.2em solid $color-medium;
+  padding: 0.5em;
+  border-radius: 0.3em;
+}
+
+.value {
+  margin-top: 0.5em;
+}

@@ -1,0 +1,20 @@
+.root {
+  background-color: $color-light;
+  display: flex;
+  width: calc($(board-cols)em + 2em);
+  height: $(board-rows)em;
+
+  &:before, &:after { /* brick walls */
+    background: url($img-wall) repeat-y left bottom;
+    background-size: contain;
+    flex: 1;
+    content: "";
+  }
+}
+
+.blocks {
+  position: relative;
+  flex: 10;
+  height: 100%;
+  align-self: flex-end;
+}

@@ -1,0 +1,41 @@
+.root {
+  background-size: cover;
+  position: absolute;
+  transition: top 0.1s linear;
+  width: 1em; height: 1em;
+}
+
+.O {
+  background-color: $color-O;
+  background-image: url($img-O);
+}
+
+.I {
+  background-color: $color-I;
+  background-image: url($img-I);
+}
+
+.T {
+  background-color: $color-T;
+  background-image: url($img-T);
+}
+
+.J {
+  background-color: $color-J;
+  background-image: url($img-J);
+}
+
+.L {
+  background-color: $color-L;
+  background-image: url($img-L);
+}
+
+.S {
+  background-color: $color-S;
+  background-image: url($img-S);
+}
+
+.Z {
+  background-color: $color-Z;
+  background-image: url($img-Z);
+}

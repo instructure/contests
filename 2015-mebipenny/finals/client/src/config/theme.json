@@ -1,0 +1,33 @@
+{
+  "board-rows": 20,
+  "board-cols": 10,
+
+  "breakpoint-x-lg":  "1824px",
+  "breakpoint-lg":    "1224px",
+  "breakpoint-md":    "1024px",
+  "breakpoint-sm":    "768px",
+  "breakpoint-xs":    "640px",
+  "breakpoint-xxs":   "321px",
+
+  "color-O":  "#585E44",
+  "color-L":  "#6B7353",
+  "color-T":  "#A4AC8C",
+  "color-J":  "#6B7353",
+  "color-I":  "#88926A",
+  "color-S":  "#595F45",
+  "color-Z":  "#595F45",
+
+  "color-light":  "#C5CEA1",
+  "color-medium": "#6B7253",
+  "color-dark":   "#272820",
+  "color-darkest": "#191919",
+
+  "img-wall": "../assets/wall.png",
+  "img-O":    "../assets/O.png",
+  "img-I":    "../assets/I.png",
+  "img-T":    "../assets/T.png",
+  "img-J":    "../assets/J.png",
+  "img-L":    "../assets/L.png",
+  "img-S":    "../assets/S.png",
+  "img-Z":    "../assets/Z.png"
+}

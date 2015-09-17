@@ -1,0 +1,16 @@
+.root {
+  position: relative;
+}
+
+.root, /* default to I */
+.I {
+  width: 4em; height: 1em;
+}
+
+.O {
+  width: 2em; height: 2em;
+}
+
+.T, .J, .L, .S, .Z {
+  width: 3em; height: 2em;
+}

@@ -1,0 +1,473 @@
+swagger: "2.0"
+
+basePath: /
+produces:
+  - application/json
+consumes:
+  - application/json
+
+info:
+  title: Pajitnov!
+  description: |
+    The final round is a bot deathmatch.
+
+    Write a JSON REST API client to play our tetromino stacking game. All
+    request and response payloads are serialized JSON data.
+
+    ## Game Description ##
+
+    Similar to other tetromino stacking games you may have played, with one
+    simplification. There is no gravity, and no need for reaction times. Your
+    client will simply know the board state and the incoming piece, and tell
+    the server your desired final resting place for that piece. A resting place
+    is legal as long as:
+
+     * all the spaces for the piece are unoccupied
+     * at least one space for the piece is supported
+     * the columns above the piece to the top of the screen are clear (no
+       in-flight slides or rotates)
+
+    Clearing more than one line at once adds "garbage" to your opponent(s)'
+    screen(s). One line of garbage for two lines cleared at once, two lines
+    of garbage for three cleared, and four lines of garbage for four lines
+    cleared.  Garbage is incomplete lines of blocks pushing up from the bottom
+    of the screen.
+
+    The winner of a match is the last player standing. Players are
+    disqualified if:
+
+     * they make an invalid move (including placing a piece that extends off
+       the top of the board), or
+     * garbage is added to their screen that pushes non-empty lines off the
+       top.
+
+    If multiple players survive to the end of N (TBD) turns, or if all of 2+
+    remaining players are disqualified in the same turn, then score is the
+    tie breaker. Scoring is 40 points for one line cleared, 100 points for
+    two lines cleared simultaneously, 300 points for three lines, and 1200
+    for four lines cleared at once.
+
+    ## Getting Started ##
+
+    ### Viewing the Visualization ###
+
+    The game viz is available at [/public/](/public), it will show all games in progress.
+
+    You can view an individual game by appending `?gameId=<game_path>` to the URL, e.g. [/public/?gameId=351166a8](/public/?gameId=351166a8).
+
+    ### Match Making ###
+
+    You can join the next available game using match making, just [GET /match](#!/Creating_a_Game/RequestMatchMaking).
+
+    ### Creating a Custom Game ###
+
+    You can also create a game from scratch with a [POST /](#!/Creating_a_Game/CreateGame).
+
+    ## Game States ##
+
+    ### INITIATING ###
+
+    The game begins in this state.  Join the game with a [POST /{game_path}/players](#!/Playing_a_Game/JoinGame).
+
+    Once the game is full the game moves to the in play state.
+
+    ### IN PLAY ###
+
+    In this state, players [POST /{game_path}/moves](#!/Playing_a_Game/MakeMove) with New Move
+    objects as payload.
+
+    ### COMPLETED ###
+
+    Play is complete. Game state can still be pulled, but no new POSTs are
+    accepted.
+
+paths:
+  /:
+    post:
+      parameters:
+        - in: body
+          name: NewGame
+          required: true
+          schema:
+            $ref: "#/definitions/NewGame"
+      operationId: CreateGame
+      tags:
+        - Creating a Game
+      summary: Create a new game.
+      description: |
+        You will receive a 201 Created response with the game_path in the Location HTTP response header.
+      responses:
+        "201":
+          description: game created
+          headers:
+            Location:
+              description: The URL to the game you've joined.
+        "403":
+          description: invalid game parameters
+
+  /{game_path}/players:
+    post:
+      parameters:
+        - in: path
+          name: game_path
+          description: The ID for the game you wish to join.
+          required: true
+          type: string
+        - in: body
+          name: NewPlayer
+          required: true
+          schema:
+            $ref: "#/definitions/NewPlayer"
+      operationId: JoinGame
+      tags:
+        - Playing a Game
+      summary: Join a game as a new player.
+      description: |
+        Give your name and join the specified game.
+
+        If you successfully join the game, you will receive a 200 OK response at
+        the beginning of your first turn, with a Game object as response
+        payload.
+
+        This response will include an X-Turn-Token HTTP response header. It will
+        also include your player ID assigned by the server, in the X-Player-Id
+        HTTP header.
+
+        If the game is no longer in this state (i.e. it is full and has already
+        started) when you POST, you will receive a 410 Gone response indicating
+        the game can no longer be joined.
+
+        Once the game is full the game moves to the in play state.
+      responses:
+        "200":
+          description: game joined
+          schema:
+            $ref: "#/definitions/Game"
+          headers:
+            "X-Turn-Token":
+              summary: Token
+              description: "Token"
+            "X-Player-Id":
+              description: Your player ID, assigned by the server
+        "403":
+          description: invalid player parameters
+        "410":
+          description: game already full
+
+  /{game_path}/moves:
+    post:
+      parameters:
+        - in: path
+          name: game_path
+          description: The ID for the game you are making a move on.
+          required: true
+          type: string
+        - in: header
+          name: X-Turn-Token
+          required: true
+          description: The token returned in the response headers for the previous move or join request.
+          type: string
+        - in: body
+          name: Move
+          required: true
+          schema:
+            $ref: "#/definitions/Move"
+      operationId: MakeMove
+      tags:
+        - Playing a Game
+      summary: Make a move.
+      description: |
+        Make your next move.
+
+        After receiving a 200 OK response to /players or /moves (indicating it is your turn) you
+        are required to POST your next move within 30 seconds. If you fail to
+        POST in that time, you are disqualified.
+
+        If the move POSTed is illegal, you will receive an immediate 403
+        Forbidden response describing the violation. You are disqualified.
+
+        Potential problems with a move are:
+
+         * The Move data is malformed. E.g. not an object, missing "locations"
+           key, not enough locations, etc.
+         * You already submitted a move this turn.
+         * The four locations do not form a valid tetronimo for the current
+           piece.
+         * The selected location is occupied (bad placement).
+         * The selected location is unsupported (bad placement).
+         * There is not a clear path to drop the piece into that location (drop
+           obstructed).
+
+        Otherwise, you will receive a 200 OK response at the beginning of your
+        next turn, with a Game Delta object. This response will include an
+        X-Turn-Token response header to be used in your next move.
+
+        After a 200 OK response, the game may have moved to the completed state.
+        This state change will be indicated in the Game Delta object. Once the
+        game is completed, further moves are ignored with a 410 Gone response.
+      responses:
+        "200":
+          description: move successful
+          schema:
+            $ref: "#/definitions/GameDelta"
+          headers:
+            "X-Turn-Token":
+              summary: Token
+              description: "Token"
+        "403":
+          description: invalid move parameters, game over
+        "410":
+          description: game has ended
+
+  /{game_path}:
+    get:
+      parameters:
+        - in: path
+          name: game_path
+          description: The ID for the game you wish to observe.
+          required: true
+          type: string
+      operationId: GetGameState
+      tags:
+        - Playing a Game
+      summary: Get the current state of any game.
+      description: |
+        At any point, the full game state can be requested with a GET request.
+        You will receive an immediate 200 OK response with a
+        Game object.
+      responses:
+        "200":
+          description: successful response
+          schema:
+            $ref: "#/definitions/Game"
+        "404":
+          description: game not found
+
+  /match:
+    get:
+      operationId: RequestMatchMaking
+      tags:
+        - Creating a Game
+      summary: Request to join an available match via matchmaking.
+      description: |
+        When you have a bot you'd like to try against others, but you don't want
+        to set up a game yourself and you don't care who your opponent is, you
+        can connect your bot to our dirt-simple (and stupid) matchmaking system.
+
+        If no one else is joining, feel free to request a match against any of
+        our bots! (Our bots are not eligible to win, so don't worry.)
+      produces: []
+      responses:
+        "302":
+          description: Matchmaking was successful. The Location header points to the new game's URL.
+          headers:
+            Location:
+              description: The URL to the game you've joined.
+
+  /{game_path}/observers:
+    post:
+      operationId: ObserveMatch
+      tags:
+        - Observers
+      summary: Start observing an ongoing match.
+      description: |
+        (Intended for use by game viewer, but may be used by others. You don't need to implement this.)
+
+        At any point, an observer may be registered. This will begin a long-running unbounded HTTP
+        response of type `application/x-multi-json`, which is a series of
+        one-line json documents separated by newlines.
+
+        You will receive an immediate 200 OK response with the first document, a
+        Game object.  After this, the response will remain open and new Game
+        Delta objects will be returned as events occur.
+
+        The HTTP response will end when the game ends, after the final Game
+        Delta object is sent.
+
+        The POST request requires no payload. However, if the payload includes a
+        "wrapper" key, then each JSON document will be fprint'ed into that text,
+        replacing the first %s. For instance, a HTML comet technique:
+
+        ```
+        { "wrapper": "\u003Cscript type='text/javascript'\u003EmyUpdater(%s);\u003C/script\u003E\n" }
+        ```
+
+        This endpoint won't work from the swagger UI, since it doesn't know how to handle a long-running response.
+      produces:
+        - application/x-multi-json
+      parameters:
+        - in: path
+          name: game_path
+          description: The ID for the game you wish to observe.
+          required: true
+          type: string
+        - in: body
+          name: wrapper
+          type: string
+          description: A string that includes "%s".
+
+definitions:
+  Player:
+    description: A player participating in a match.
+    required:
+      - id
+      - name
+      - disqualified
+      - score
+      - lines
+    properties:
+      id:
+        type: string
+        description: unique, opaque identifier for this player
+      name:
+        type: string
+        description: the player's provided name
+      disqualified:
+        type: boolean
+        description: if true, the player has been disqualified (and lost the match)
+      score:
+        type: integer
+        description: the player's current score
+      lines:
+        type: integer
+        description: how many lines the player has scored
+      last_move:
+        description: the player's last move, if any
+        type: array
+        items:
+          - $ref: "#/definitions/Location"
+          - $ref: "#/definitions/Location"
+          - $ref: "#/definitions/Location"
+          - $ref: "#/definitions/Location"
+      board:
+        description: the current state of the player's board
+        $ref: "#/definitions/Board"
+
+  Game:
+    description: The full state of a game in play.
+    required:
+      - state
+      - rows
+      - cols
+      - players
+    properties:
+      state:
+        description: The current game state.
+        $ref: "#/definitions/GameState"
+      rows:
+        type: integer
+        description: The number of rows in the playfield. Will always be `20`.
+      cols:
+        type: integer
+        description: The number of columns in the playfield. Will always be `10`.
+      players:
+        description: The players participating in the game.
+        type: array
+        items:
+          $ref: "#/definitions/Player"
+      current_piece:
+        description: The current tetromino piece in play.
+        $ref: "#/definitions/Piece"
+      next_piece:
+        description: The next tetromino piece in play.
+        $ref: "#/definitions/Piece"
+
+  Piece:
+    type: string
+    enum: [I, J, L, O, S, T, Z]
+
+  GameState:
+    type: string
+    enum:
+      - initiating
+      - in play
+      - completed
+
+  GameDelta:
+    description: A diff of the new game state after a move is made.
+    required:
+      - current_piece
+      - next_piece
+      - players
+      - state
+    properties:
+      state:
+        description: The current game state.
+        $ref: "#/definitions/GameState"
+      current_piece:
+        description: The current tetromino piece in play.
+        $ref: "#/definitions/Piece"
+      next_piece:
+        description: The next tetromino piece in play.
+        $ref: "#/definitions/Piece"
+      players:
+        description: The players participating in the game.
+        type: array
+        items:
+          $ref: "#/definitions/Player"
+
+  Location:
+    required:
+      - row
+      - col
+    properties:
+      row:
+        type: integer
+      col:
+        type: integer
+
+  Move:
+    description: The move specifies a list of four locations that the piece will occupy.
+    required:
+      - locations
+    properties:
+      locations:
+        type: array
+        items:
+          - $ref: "#/definitions/Location"
+          - $ref: "#/definitions/Location"
+          - $ref: "#/definitions/Location"
+          - $ref: "#/definitions/Location"
+
+  NewGame:
+    required:
+      - seats
+    properties:
+      seats:
+        type: integer
+        description: The number of players for the game. must be between `1` and `4`.
+        minimum: 1
+        maximum: 4
+      turns:
+        type: integer
+        description: |
+          The number of turns to run the game. If absent, game length is
+          unlimited. If provided, must be at least `1`.
+        minimum: 1
+      initial_garbage:
+        type: integer
+        default: 0
+        description: |
+          The number of garbage lines on the players' boards at the start of the game.
+          Must be between 0 and 20, defaults to 0.
+        minimum: 0
+        maximum: 20
+
+  NewPlayer:
+    required:
+      - name
+    properties:
+      name:
+        type: string
+        description: Your player name.
+
+  Board:
+    type: array
+    description: The state of the player's board. An array of rows, bottom row first.
+    items:
+      $ref: "#/definitions/BoardRow"
+  BoardRow:
+    type: array
+    description: A row in a player's board. An array of pieces, or null for empty spaces.
+    items:
+      $ref: "#/definitions/Piece"

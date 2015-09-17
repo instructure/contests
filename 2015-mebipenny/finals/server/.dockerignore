@@ -1,0 +1,5 @@
+log/*
+.git/*
+.bundle/*
+node_modules/*
+tmp/*

@@ -1,0 +1,62 @@
+
+.root {
+  background-color: $color-dark;
+  border: 0.1em solid transparent;
+
+  position: relative;
+  display: flex;
+}
+
+.player {
+  position: absolute;
+  top: 0; left: 0;
+  text-align: center;
+  margin-left: 1em;
+  box-sizing: border-box;
+  padding: 1em;
+  color: $color-medium;
+  text-shadow:
+    0.125em 0.125em 0 $color-light,
+    -0.125em -0.125em 0 $color-light,
+    -0.125em 0.125em 0 $color-light,
+    0.125em -0.125em 0 $color-light;
+}
+
+.msg {
+  top: 0; left: 1em;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $color-light;
+  text-shadow:
+    0.125em 0.125em 0 $color-dark,
+    -0.125em -0.125em 0 $color-dark,
+    -0.125em 0.125em 0 $color-dark,
+    0.125em -0.125em 0 $color-dark;
+}
+
+.info {
+  width: 7em;
+  padding: 0 0.5em 0.5em 0.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.nextPiece {
+  background-color: $color-light;
+  border-radius: 0.5em 0.5em 1.5em 0.5em;
+  padding: 1em;
+  box-sizing: border-box;
+  height: 5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rank {
+  color: $color-medium;
+  font-size: 2em;
+}

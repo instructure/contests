@@ -1,0 +1,17 @@
+.root {
+  background-color: $color-light;
+  display: flex;
+
+  &:before, &:after { /* brick walls */
+    background: url($img-wall) repeat-y left bottom;
+    background-size: contain;
+    flex: 1;
+    content: "";
+  }
+}
+
+.board {
+  position: relative;
+  height: 100%;
+  align-self: flex-end;
+}

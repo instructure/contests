@@ -1,0 +1,6 @@
+#!/bin/bash
+
+## Boot the app
+echo "Starting web server"
+bundle exec thin start -p 3000 -t 300 -d
+exec /usr/src/entrypoint

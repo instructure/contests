@@ -1,0 +1,5 @@
+.bundle/
+tmp/
+public/index.html
+public/style.*
+public/javascript.*

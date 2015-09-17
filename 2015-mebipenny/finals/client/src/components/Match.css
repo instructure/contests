@@ -1,0 +1,51 @@
+@import url(//fonts.googleapis.com/css?family=Press+Start+2P);
+
+.root {
+  border: 0.1em solid $color-light;
+  background-color: $color-dark;
+  border-radius: 0.5em 0.5em 1.5em 0.5em;
+  font-family: "Press Start 2P", "Helvetica Neue", "Arial", sans-serif;
+
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1em; padding-left: 0.5em;
+  position: relative;
+
+  @media only screen and (width <= $breakpoint-xs) {
+    & {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+}
+
+.msg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 0.5em 0.5em 1.5em 0.5em;
+
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 999;
+  margin: auto;
+
+  color: $color-light;
+  text-shadow:
+    0.125em 0.125em 0 $color-dark,
+    -0.125em -0.125em 0 $color-dark,
+    -0.125em 0.125em 0 $color-dark,
+    0.125em -0.125em 0 $color-dark;
+}
+
+.msg:first-child {
+  position: static;
+  padding: 0 1em;
+  height: $(board-rows)em;
+}

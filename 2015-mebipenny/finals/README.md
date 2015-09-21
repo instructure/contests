@@ -1,5 +1,7 @@
 # Pajitnov
 
+![Alt text](bots/stringham/gameplay.gif?raw=true "Pajitnov in action")
+
 This is a tetromino stacking game server and visualization that can be played
 by 2-4 bots.
 
